@@ -1,10 +1,10 @@
 # Markdown cheat sheet
 
-> これはもともとMarkdown勉強時に個人的な備忘録として書いたものですが、役立つ人もいらっしゃるかも知れませんので最低限の体裁を整えcheat sheetとして公開します。
+> これはもともとMarkdown勉強時の際に個人的な備忘録として書いたものです。加筆しているうち公開できそうな内容に仕上がったので体裁を整え公開します。
 > 
 > 全体の構成としては最初にコードを示し、次にその表示イメージを実際に示してどのように変換されるか目で分かるようにしています。表示結果は引用を使って他の部分と区別しています(特にheaderの説明時に混乱を避けるため)。
 > 
-> > 最初はテキスト文書として書き始めたものですが、途中からこの文章自体もMarkdownで書き直しました(それ自体とてもよい演習です)。どのように記述してあるかはソースファイルをご覧下さい。
+> > 最初はテキスト文書として書き始めたものですが、途中からこの文章自体もMarkdownで書き直しました(それ自体とてもよい演習です)。どのように記述してあるかは本文をRawモードで見れば分かります。
 
 ## リファレンス
 
@@ -16,23 +16,23 @@ Markdownリファレンス
 
 GitHub Flavored Markdown: <https://help.github.com/articles/github-flavored-markdown>
 
-> なお勉強開始時は文法確認にオンラインプレビューを使うのが効果的。探せば色々見つかるがおすすめは次のサイトで、左右で原文と変換結果を比較でき、出力もほぼgithubと同じようにフォーマットして表示してくれる。
+> 勉強開始時は文法確認にオンラインプレビューを使うとよい。探せば色々見つかるがおすすめは次のサイトで、左右で原文と変換結果を比較でき、出力もほぼgithubと同じようにフォーマットして表示してくれる。
 > 
 > <http://tmpvar.com/markdown.html>
 > 
-> ローカルファイルシステム上のMarkdown文章は次のサイトを使えばプレビューできる(これも便利)。ページにアクセスしてタイトル部分にファイルをドロップすればよい。
+> またローカルファイルシステム上のMarkdown文章は次のサイトを使えばプレビューできる(これも便利)。ページにアクセスしてタイトル部分にファイルをドロップすればブラウザで閲覧できる。
 > 
 > <http://playground.k11i.biz/mp/>
 
-以下Markdownリファレンスの章立てに従い順に説明する。
+以下Markdownリファレンスの章立ての順に説明する。
 
 ## Overview
 
 ### Inline HTML
 
-Markdownはホームページを書くことを目的としている。Markdownで表現できない書式はHTMLタグを使って表現できる。
+Markdownは基本的にホームページを簡単に書くことを目的としており、HTMLでよく使われる書式をHTMLより容易に記述できる。Markdownで表現できない書式はHTMLタグを使えば表現できる。
 
-ブロック要素(`<div>` `<table>` `<pre>` `<p>`など)は次のルールに従って認識させる必要がある。
+ブロック要素(`<div>` `<table>` `<pre>` `<p>`など)は次のルールで記述すれば認識する。
 
 * 前後に空行を置く
 * タグは行頭に置く(手前にスペースやタブを入れない)
@@ -45,7 +45,7 @@ Markdownはホームページを書くことを目的としている。Markdown�
 
 > This is *emphasized*
 
-しかし`<p>`はブロック要素なので内部では強調の`*...*`が適用されない。
+しかし次の例では`<p>`はブロック要素なので内部では強調の`*...*`が適用されない。
 
     <p> This is *not emphasized*</p>
 
@@ -61,9 +61,9 @@ Markdownはホームページを書くことを目的としている。Markdown�
 
 インライン要素内ではMarkdown文法が有効になる。
 
-    <span style="color:blue">Blue and *emphasized*</span>
+    This is <span style="color:green">green and *emphasized*</span>
 
-> <span style="color:blue">Blue and *emphasized*</span>
+> This is <span style="color:green">green and *emphasized*</span>
 
 ### Automatic Escaping for Special Characters
 
@@ -99,7 +99,7 @@ HTMLでは`<`や`&`は特殊文字であり、文字実体参照を使って`&lt
 
 ### Headers
 
-ヘッダは2つの形式をサポートしている。最初の形式は次の通りで`<h1>`と`<h2>`にそれぞれ変換される。
+ヘッダは2つの形式をサポートしている。最初の形式は次の通り。文章の直下の行が`=`または`-`の場合はそれぞれ`<h1>`と`<h2>`に対応する。
 
     This is an H1
     =============
@@ -117,17 +117,22 @@ HTMLでは`<`や`&`は特殊文字であり、文字実体参照を使って`&lt
 
 ===や---の長さは文字の長さと関係ない。次でも同じ結果になる。
 
-    This is also an H1
+    This is an H1
     =
 
-    This is also an H2
+    This is an H2
     ---------------------------
 
-> This is also an H1
+> This is an H1
 > =
 
-> This is also an H2
+> This is an H2
 > ---------------------------
+
+どちらも次のHTMLに変換される。
+
+>     <h1>This is an H1</h1>
+>     <h2>This is an H2</h2>
 
 2つ目の形式は先頭に#をレベルの数だけ置く。この形式は`<h3>`以上も表現できる。
 
@@ -189,7 +194,7 @@ blockquote paragraph.
 > 
 > Back to the first level.
 
-引用の中でMarkdown文法を使うことができる。
+引用の中でもMarkdown文法を使うことができる。
 
     > ## This is a header.
     >
@@ -211,7 +216,7 @@ blockquote paragraph.
 
 # Lists
 
-印付きリスト(`<ul>`)は次のように表現する。
+順序なしリスト(`<ul>`)は次のように表現する。
 
     * Red
     * Green
@@ -231,6 +236,14 @@ blockquote paragraph.
 > + Green
 > * Blue
 
+どちらも次のHTMLを生成する。
+
+    <ul>
+    <li>Red</li>
+    <li>Green</li>
+    <li>Blue</li>
+    </ul>
+
 (本文に書いてないが)入れ子はインデントで表現する。タブ1つまたは半角スペース4つで認識する。
 
     * 1st
@@ -245,11 +258,34 @@ blockquote paragraph.
 >     * 2nd
 >         * 3rd
 
-インデントの解釈は実装により違いがあるようなので注意して使うこと。
+---
 
-> スペース4つ(またはタブ1つ)が基本(というのをWeb上で読んだ記憶はあるがどこのサイトかか思い出せない)。ただし実際の実装は可能な限り(エラーにせず)通すものが多く、その仕様も色々異なるようだ(要調査)。
+>     <ul>
+>         <li>1st
+>         <ul>
+>             <li>2nd
+>             <ul>
+>                 <li>3rd</li>
+>             </ul>
+>             </li>
+>             <li>2nd
+>             <ul>
+>                 <li>3rd</li>
+>             </ul>
+>             </li>
+>         </ul>
+>         </li>
+>     </ul>
+
+---
+
+> インデントはスペース4つ(またはタブ1つ)が基本(Web上で読んだ記憶はあるがどこのサイトか思い出せない)。ただし(本家のPerl実装を始め)可能な限りエラーにはしないので詳細仕様は実装により異なると考えるべき。4の倍数にしておけば確実。
 > 
-> また先頭記号として`*`以外に`+`と`-`も使えるようにした理由はテキスト状態でツリー表示した場合の便宜を考慮したものだろう。次のような例を考えること。
+> > ここではgithubが用いている実装をリファレンスとする。
+
+---
+
+> 先頭記号として`*`以外に`+`と`-`も使えるようにした理由はテキスト状態でツリー表示した場合を考慮したものだろう。次のような例を考えること。
 > 
 >     - usr
 >         + bin
@@ -291,7 +327,7 @@ blockquote paragraph.
 
 > 元のHTMLに番号を設定する機能がないため現状ではこうするよりない。ただし将来番号を設定する機能が付く可能性も考えられるので、1から連番にしておけば間違いない。
 
-リストの正式なルールは次の通り。手前に3個までスペースを置いてよい(4つ以上でインデントとして認識する)。
+リストの正式なルールは次の通り。手前に3個までスペースを置いてよい(4つ以上あるとインデントとして認識する)。
 
     [0...3個のスペース](*,+,-,または数値とピリオド)[1個以上のスペース]文章
 
@@ -309,18 +345,25 @@ blockquote paragraph.
 > *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
 >     Suspendisse id sem consectetuer libero luctus adipiscing.
 
-空行は段落と認識されることを忘れないこと。
+空行は段落と認識されることを忘れてはいけない。
 
     * Bird
 
     * Magic
 
+
 このように空行があると段落とみなされ次のように変換される。
 
-    <ul>
-    <li><p>Bird</p></li>
-    <li><p>Magic</p></li>
-    </ul>
+> * Bird
+>
+> * Magic
+
+---
+
+>     <ul>
+>     <li><p>Bird</p></li>
+>     <li><p>Magic</p></li>
+>     </ul>
 
 ここで`<li>...</li>`の中に`<p>...</p>`が展開されることに注目。そのため次のように書くことができる。
 
@@ -356,7 +399,7 @@ blockquote paragraph.
 >     > This is a blockquote
 >     > inside a list item.
 
-コードを挿入するにはスペース8つまたはタブ2つが必要。
+引用の内部にコードを挿入するにはスペース8つ(またはタブ2つ)が必要。
 
     *   A list item with a code block:
 
@@ -366,7 +409,7 @@ blockquote paragraph.
 > 
 >         <code goes here>
 
-次の場合に注意。普通に書いたつもりの文章が偶然リストと同じ形式になってしまうことがある。
+最後は次のケースに注意。普通に書いたつもりの文章が偶然リストと同じ形式になってしまうことがある。
 
     1986. What a great season.
 
@@ -380,7 +423,7 @@ blockquote paragraph.
 
 ### Code Blocks
 
-コードブロックはスペース4つまたはタブ1つを先頭に付ける。
+コードブロックはスペース4つ(またはタブ1つ)を先頭に付ける。
 
     This is a normal paragraph:
 
@@ -390,14 +433,14 @@ blockquote paragraph.
 > 
 >     This is a code block.
 
-これは次のように変換される。`<code>`はインライン要素扱いなのでブロック要素の`<pre>`を併用したものに変換する。また先頭の認識用空白は除去される。
+変換結果は次の通り。先頭の空白(スペース4つまたはタブ一つ)は除去する。また`<code>`はインライン要素なのでブロック要素の`<pre>`を併用して出力する。
 
     <p>This is a normal paragraph:</p>
 
     <pre><code>This is a code block.
     </code></pre>
 
-コードブロック内では`<` `>` `&`を自動的に`&lt;` `&gt;` `&amp;`に変換する。これは特にHTMLソースを挿入する場合に便利で、ほとんどの場合はそのまま貼ればよい。
+コードブロック内では`<` `>` `&`を自動的に`&lt;` `&gt;` `&amp;`に変換する。これは特にHTMLソースを挿入する場合に便利で、ほとんどの場合はそのままペーストしてインデントだけ追加すれば認識する。
 
         <div class="footer">
             &copy; 2004 Foo Corporation
@@ -446,8 +489,8 @@ blockquote paragraph.
 
 次のように変換される。
 
-    <p>This is <a href="http://example.com/" title="Title">
-    an example</a> inline link.</p>
+>     <p>This is <a href="http://example.com/" title="Title">
+>     an example</a> inline link.</p>
 
 これは単純な変換なので相対リンク(同一サーバ上)でもよい。
 
@@ -519,7 +562,7 @@ IDは空白を含んでよいため、次のようなこともできる。
 [2]: http://search.yahoo.com/  "Yahoo Search"
 [3]: http://search.msn.com/    "MSN Search"
 
-名称そのものをIDにしてもよい。以下の例では大文字と小文字を区別してないことに注意。
+名称そのものをIDにできるため次のように書いてもよい。以下の例では大文字と小文字を区別してないことに注意。
 
     I get 10 times more traffic from [Google][] than from
     [Yahoo][] or [MSN][].
@@ -537,10 +580,10 @@ IDは空白を含んでよいため、次のようなこともできる。
 
 どちらも次のように変換される。
 
-    <p>I get 10 times more traffic from <a href="http://google.com/"
-    title="Google">Google</a> than from
-    <a href="http://search.yahoo.com/" title="Yahoo Search">Yahoo</a>
-    or <a href="http://search.msn.com/" title="MSN Search">MSN</a>.</p>
+>     <p>I get 10 times more traffic from <a href="http://google.com/"
+>     title="Google">Google</a> than from
+>     <a href="http://search.yahoo.com/" title="Yahoo Search">Yahoo</a>
+>     or <a href="http://search.msn.com/" title="MSN Search">MSN</a>.</p>
 
 この参照リンクの機能は書きやすさよりもむしろ見やすさを考慮したもので、次のように直接書いた場合と比較すれば効果がよく分かる。
 
@@ -570,12 +613,15 @@ IDは空白を含んでよいため、次のようなこともできる。
 
 前後に半角スペースがある場合はこれに該当しない(そうでないと色々と不便)。またアスタリスクやアンダーライン文字をそのまま記述する場合はバックスラッシュでエスケープする。
 
-    y = 2 * x + 1 (前後のスペースがあるのでそのままでOK)
-
-    You're f\*\*king crazy. (これはエスケープが必要)
+次の場合は前後のスペースがあるのでそのままでOK。
+    y = 2 * x + 1
 
 > y = 2 * x + 1
-> 
+
+次の例は前後のスペースがないのでバックスラッシュでエスケープする。
+
+    You're f\*\*king crazy.
+
 > You're f\*\*king crazy.
 
 ソースコードを(ブロックでなく)インラインで引用する場合は`` `...` ``で表現する。
@@ -596,7 +642,7 @@ IDは空白を含んでよいため、次のようなこともできる。
 
 ---
 
-> 副作用としてインラインコードの中では\`の連続(\`\`)を書くことができない。しかしめったにない特殊ケースなので、不都合を生じることはほとんどないと思う。
+> 副作用としてインラインコードの中では\`の連続(\`\`)を書くことができない。しかしめったにない特殊ケースなので不都合を生じることはほとんどないと思う。
 
 最初または最後が`の場合は間にスペースをひとつ入れる(ないと認識しない)。この空白は除去される。
 
@@ -627,11 +673,11 @@ IDは空白を含んでよいため、次のようなこともできる。
 
 > ![Github mascot Octcat](https://raw.github.com/github/media/master/octocats/octocat.png "Octcat")
 
-参照の場合は次の通り。
+参照の場合は次の通り。先頭の`!`以外は同じなので書式だけ示す。
 
     ![Alt text][id]
 
-参照される側は`<a>`と同じ。
+定義側はリンクのIDと同じ書式を用いる。
 
     [id]: url/to/image  "Optional title attribute"
 
@@ -699,7 +745,7 @@ Githubでは標準Markdown(Standard Markdown:以下SM)を拡張したGitHub Flav
 
 ### Newlines
 
-本文には「SMと異なり改行を認識する」という意味の文章が書かれているが、実際にはそうではないようだ。ここで「実験」してみる。
+本文には「GFMはSMと異なり改行を認識する」という意味の文章が書かれているが、実際にはそうではないようだ。ここで「実験」してみる。
 
     Roses are red
     Violets are blue
@@ -717,7 +763,7 @@ Violets are blue
 
 ### Multiple underscores in words
 
-SMは英数字とアンダースコアの連続があるとそれを強調表示と認識しようとする。しかしこの仕様はsnake\_caseを多用する言語(特にRuby)と相性が悪く、例えば`each_with_index`のようにsnake\_caseを2回(以上)使う名前の中央部(この場合はwith)が強調と(誤?)認識される。
+SMは英数字とアンダースコアの連続があるとそれを強調表示と認識しようとする。しかしこの仕様はsnake\_caseを多用する言語(特にRuby)と相性が悪く、例えば`each_with_index`の中央部(with)が強調と(誤?)認識される。
 
 GFMは(連続した)語に複数回出現するアンダースコアを強調と認識しない(無視する)。
 
@@ -747,7 +793,7 @@ GFMは取り消し線を`~~...~~`で表現できる。
 
 ### Fenced code blocks
 
-SMはコードブロックをスペース4つのインデントで判別するが、GFMは\`\`\`で囲んだ段落全体をコードブロックと認識する(インデント不要)。
+SMはコードブロックをスペース4つのインデントで判別するが、GFMは\`\`\`で囲んだブロックもコードブロックと認識する(インデント不要)。
 
     ```
     npm install -g coffee
@@ -768,7 +814,7 @@ SMはコードブロックをスペース4つのインデントで判別する�
 
 > ``` ruby
 > require 'open-uri'
-  open 'https://github.com/higuma' {|f| puts f.read }
+> open 'https://github.com/higuma' {|f| puts f.read }
 > ```
 
     ``` python
@@ -791,7 +837,7 @@ SMはコードブロックをスペース4つのインデントで判別する�
 
 ---
 
-> 以降は主にpull requestを書く場合などgithubの各種操作に関する項目。タイトルだけ示す。
+> 以降は主にpull requestを書く場合などgithubの各種操作に関する項目。割愛してタイトルだけ示す。
 > 
 > * Task Lists
 > * Quick quoting
