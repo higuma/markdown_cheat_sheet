@@ -1,6 +1,6 @@
-# Markdown cheat sheet
+# Markdown cheat sheet (2nd edition)
 
-> これはもともとMarkdown勉強時の際に個人的な備忘録として書いたものです。加筆しているうち公開できそうな内容に仕上がったので体裁を整え公開します。
+> これはもともとMarkdown勉強時の個人的な備忘録として書いたものですが、気が付いたらもうチートシートではなく詳細解説になってしまいました。文法の細かい部分の確認用にご利用下さい。
 > 
 > 全体の構成としては最初にコードを示し、次にその表示イメージを実際に示してどのように変換されるか目で分かるようにしています。表示結果は引用を使って他の部分と区別しています(特にheaderの説明時に混乱を避けるため)。
 > 
@@ -8,17 +8,24 @@
 
 ## リファレンス
 
-Markdownリファレンス
+Markdownリファレンス(Daring Fireball)
 
-原文: <http://daringfireball.net/projects/markdown/syntax>
+* 原文: <http://daringfireball.net/projects/markdown/syntax>
+* 和訳: <http://blog.2310.net/archives/6>
 
-和訳: <http://blog.2310.net/archives/6>
+GitHub Flavored Markdown (Github拡張)
 
-GitHub Flavored Markdown: <https://help.github.com/articles/github-flavored-markdown>
+* <https://help.github.com/articles/github-flavored-markdown>
+
+Markdown記法 チートシート (Qiita拡張)
+
+* <http://qiita.com/Qiita/items/c686397e4a0f4f11683d>
 
 > 勉強開始時は文法確認にオンラインプレビューを使うとよい。探せば色々見つかるがおすすめは次のサイトで、左右で原文と変換結果を比較でき、出力もほぼgithubと同じようにフォーマットして表示してくれる。
 > 
 > <http://tmpvar.com/markdown.html>
+> 
+> > (追記) Qiitaの投稿プレビューはもっと便利。後で説明するGithubやQiitaの拡張文法もすべて認識する。
 > 
 > またローカルファイルシステム上のMarkdown文章は次のサイトを使えばプレビューできる(これも便利)。ページにアクセスしてタイトル部分にファイルをドロップすればブラウザで閲覧できる。
 > 
@@ -633,7 +640,7 @@ IDは空白を含んでよいため、次のようなこともできる。
 
 >     <p>Use the <code>printf()</code> function.</p>
 
-インラインコードの中に`` ` ``が含まれる場合は、特殊記法として次のように`` ` ``を2つ重ねて書く。
+インラインコードの中に`` ` ``が含まれる場合は、2重バッククォート(``` `` ```)で囲む。
 
     ``files = `ls`.split``
 
@@ -641,9 +648,13 @@ IDは空白を含んでよいため、次のようなこともできる。
 >
 >     <p><code>files = `ls`.split</code></p>
 
----
+さらにインラインコードの中にn重のバッククォートがある場合は(n+1)重のバッククォートで囲む。
 
-> 副作用としてインラインコードの中では\`の連続(\`\`)を書くことができない。しかしめったにない特殊ケースなので不都合を生じることはほとんどないと思う。
+    ``` ``double-back-quote`` ```
+
+> ``` ``double-back-quote`` ```
+> 
+>     <p><code>``doubled back-quote``</code></p>
 
 最初または最後が`の場合は間にスペースをひとつ入れる(ないと認識しない)。この空白は除去される。
 
@@ -744,35 +755,19 @@ Githubでは標準Markdown(Standard Markdown:以下SM)を拡張したGitHub Flav
 
 <https://help.github.com/articles/github-flavored-markdown>
 
-### Newlines
-
-本文には「GFMはSMと異なり改行を認識する」という意味の文章が書かれているが、実際にはそうではないようだ。ここで「実験」してみる。
-
-    Roses are red
-    Violets are blue
-
-これは次の通り表示される(正確を期すためここは引用を使わない)。GFM仕様であれば改行されるはずだが、実際には改行しない。
-
----
-
-Roses are red
-Violets are blue
-
----
-
-> どうやらこの仕様は不評だったので元に戻したらしい(すでに「旧仕様」のMarkdown文書が世界中にある訳だし...)。
+> 2014年4月現在の内容。なお旧版(2013年11月に確認)には最初に"Newlines"というsectionがあり「GFMはSMと異なり改行を認識する」という意味の記述があったが実情に即していなかった。現在は完全に廃止されている。
 
 ### Multiple underscores in words
 
 SMは英数字とアンダースコアの連続があるとそれを強調表示と認識しようとする。しかしこの仕様はsnake\_caseを多用する言語(特にRuby)と相性が悪く、例えば`each_with_index`の中央部(with)が強調と(誤?)認識される。
 
-GFMは(連続した)語に複数回出現するアンダースコアを強調と認識しない(無視する)。
+GFMは(連続した)語に複数回出現するアンダースコアを強調と認識しない(無視する)。以下はどちらもRubyでよく出てくる例。
 
-    each_with_index
+    items.each_with_index |item, index|
 
     module_function :parse_text
 
-> each_with_index
+> items.each_with_index |item, index|
 > 
 > module_function :parse_text
 
@@ -836,15 +831,97 @@ SMはコードブロックをスペース4つのインデントで判別する�
 > var dc = document.getElementById('canvas').getContext('2d');
 > ```
 
----
+(注意)言語名は全て小文字で記述すること(`JavaScript`では認識しない)。
 
-> 以降は主にpull requestを書く場合などgithubの各種操作に関する項目。割愛してタイトルだけ示す。
-> 
-> * Task Lists
-> * Quick quoting
-> * Name and Team @mentions autocomplete
-> * Emoji autocomplete
-> * Zen Mode (fullscreen) writing
-> * References
-> * Code
+
+### Tables
+
+`-`と`|`を使った簡易`<table>`作成機能がある。
+
+     TH  |  TH
+    ---- | ----
+     TD  |  TD
+     TD  |  TD
+
+>  TH  |  TH
+> ---- | ----
+>  TD  |  TD
+>  TD  |  TD
+
+両端に`|`があってもよい(見やすさのため)。次の例は最初と同じ結果になる。
+
+    |  TH  |  TH  |
+    | ---- | ---- |
+    |  TD  |  TD  |
+    |  TD  |  TD  |
+
+> |  TH  |  TH  |
+> | ---- | ---- |
+> |  TD  |  TD  |
+> |  TD  |  TD  |
+
+`-`の数は合わせなくてもよい。
+
+     TH | TH
+    -------|---------
+    TD | TD
+    TD   | TD
+
+>  TH | TH
+> -------|---------
+> TD | TD
+> TD   | TD
+
+アラインメントは次のように記述できる。
+
+     left | center | right
+    :---- |:------:| -----:
+      TD  |   TD   |   TD
+
+>  left | center | right
+> :---- |:------:| -----:
+>   TD  |   TD   |   TD
+
+> Tableは最近追加された(2014年4月確認)。この文法はすでに多くのサイトで採用されている(Qiitaは2年前から採用)。なおオリジナルはPHP Markdown Extraらしい。
+
+> <http://michelf.ca/projects/php-markdown/extra/>
+
+## Qiita拡張
+
+Qiita (http://qiita.com/>)ではGitHub Flavored Markdownをベースとしてさらに拡張した方言が用いられる。文法は次を参照。 
+
+<http://qiita.com/Qiita/items/c686397e4a0f4f11683d?
+
+### コード
+
+GFMと同じトリプルバッククォートを使える。さらに先頭部に`language:filename`の形式で言語とファイル名の両方を記述できる。これで文法ハイライトが有効になり、さらにコードブロックの左上にファイル名を表示する。
+
+    ``` coffeescript:test.coffee
+    for x in items
+      console.log x
+    ```
+
+> ``` coffeescript:test.coffee
+> for x in items
+>   console.log x
+> ```
+
+### 数式(TeX形式)
+
+トリプルバッククォート形式コードブロックで言語をmathとするとTeX記法による数式を記述できる。
+
+    ``` math
+    F(s)=\int_{0}^{\infty}f(t)e^{-st}dt
+    ```
+
+``` math
+F(s)=\int_{0}^{\infty}f(t)e^{-st}dt
+
+```
+
+インラインコードブロックと同じように`$formula$`と書くとインラインで数式を挿入できる。
+
+    このインライン数式$E=mc^2$はQiitaでだけ使えます。
+
+> このインライン数式$E=mc^2$はQiitaでだけ使えます。
 
