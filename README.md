@@ -898,7 +898,7 @@ TD | TD
 
 Qiita (<http://qiita.com/>)ではGitHub Flavored Markdownをベースとしてさらに拡張した方言が用いられる。文法は次を参照。 
 
-<http://qiita.com/Qiita/items/c686397e4a0f4f11683d?
+<http://qiita.com/Qiita/items/c686397e4a0f4f11683d>
 
 ### コード
 
