@@ -836,6 +836,10 @@ SMはコードブロックをスペース4つのインデントで判別する�
 
 ### Tables
 
+> Tableは最近追加された(2014年4月確認)。この文法はすでに多くのサイトで採用されている(Qiitaは2年前から採用)。なおオリジナルはPHP Markdown Extraらしい。
+
+> <http://michelf.ca/projects/php-markdown/extra/>
+
 `-`と`|`を使った簡易`<table>`作成機能がある。
 
 ```
@@ -889,10 +893,6 @@ TD | TD
 >  left | center | right
 > :---- |:------:| -----:
 >   L   |   C    |   R
-
-> Tableは最近追加された(2014年4月確認)。この文法はすでに多くのサイトで採用されている(Qiitaは2年前から採用)。なおオリジナルはPHP Markdown Extraらしい。
-
-> <http://michelf.ca/projects/php-markdown/extra/>
 
 ## Qiita拡張
 
