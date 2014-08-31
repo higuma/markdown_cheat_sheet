@@ -1,17 +1,17 @@
 # Markdown cheat sheet (2nd edition)
 
-> これはもともとMarkdown勉強時の個人的な備忘録として書いたものですが、気が付いたらもうチートシートではなく詳細解説になってしまいました。文法の細かい部分の確認用にご利用下さい。
+> これはもともとMarkdown勉強時の個人的な備忘録として書いたものですが、気が付いたらもうチートシートではなく詳細解説になってしまいました。文法の細かい部分の確認にご利用下さい。
 > 
 > 全体の構成としては最初にコードを示し、次にその表示イメージを実際に示してどのように変換されるか目で分かるようにしています。表示結果は引用を使って他の部分と区別しています(特にheaderの説明時に混乱を避けるため)。
 > 
-> > 最初はテキスト文書として書き始めたものですが、途中からこの文章自体もMarkdownで書き直しました(それ自体とてもよい演習です)。どのように記述してあるかは本文のソースををRawモードで見れば分かります。
+> > 最初はテキスト文書として書き始めたものですが、途中からこの文章自体もMarkdownで書き直しました(それ自体とてもよい演習です)。どのように記述してあるかは本文のソースをRawモードで見れば分かります。
 
 ## リファレンス
 
 Markdownリファレンス(Daring Fireball)
 
 * 原文: <http://daringfireball.net/projects/markdown/syntax>
-* 和訳: <http://blog.2310.net/archives/6>
+* 和訳: ~~<http://blog.2310.net/archives/6>~~ (デッドリンク)
 
 GitHub Flavored Markdown (Github拡張)
 
@@ -25,7 +25,7 @@ Markdown記法 チートシート (Qiita拡張)
 > 
 > <http://tmpvar.com/markdown.html>
 > 
-> > (追記) Qiitaの投稿プレビューはもっと便利。後で説明するGithubやQiitaの拡張文法もすべて認識する。
+> > (追記) Qiitaの投稿プレビューはもっと便利で、(後で説明する)GithubやQiitaの拡張文法もすべて認識します。
 > 
 > またローカルファイルシステム上のMarkdown文章は次のサイトを使えばプレビューできる(これも便利)。ページにアクセスしてタイトル部分にファイルをドロップすればブラウザで閲覧できる。
 > 
@@ -66,15 +66,19 @@ Markdownは基本的にホームページを簡単に書くことを目的とし
 
 > This is <span style="color:red">red</span>
 
+> > 補足: これを赤文字で表示する処理系が実際にありますが、Qiitaでは`style`属性は認識されません。
+
 インライン要素内ではMarkdown文法が有効になる。
 
     This is <span style="color:green">green and *emphasized*</span>
 
 > This is <span style="color:green">green and *emphasized*</span>
 
+> > 補足: Qiitaでは`style`は効きません。
+
 ### Automatic Escaping for Special Characters
 
-HTMLでは`<`や`&`は特殊文字であり、文字実体参照を使って`&lt;`や`&ampt;`などと書く必要がある。Markdownではこれらの特殊文字を自動変換して自然に処理する。
+HTMLでは`<`や`&`は特殊文字であり、文字実体参照を使って`&lt;`や`&amp;`などと書く必要がある。Markdownではこれらの特殊文字を自動変換して自然に処理する。
 
 * `&copy;` =\> &copy; (コピーライトマークの文字実体参照)
 * `AT&T` =\> AT&T (`AT&amp;T`に自動変換)
@@ -221,7 +225,7 @@ blockquote paragraph.
 >
 >     return shell_exec("echo $input | $markdown_script");
 
-# Lists
+## Lists
 
 順序なしリスト(`<ul>`)は次のように表現する。
 
@@ -755,8 +759,6 @@ Githubでは標準Markdown(Standard Markdown:以下SM)を拡張したGitHub Flav
 
 <https://help.github.com/articles/github-flavored-markdown>
 
-> 2014年4月現在の内容。なお旧版(2013年11月に確認)には最初に"Newlines"というsectionがあり「GFMはSMと異なり改行を認識する」という意味の記述があったが実情に即していなかった。現在は完全に廃止されている。
-
 ### Multiple underscores in words
 
 SMは英数字とアンダースコアの連続があるとそれを強調表示と認識しようとする。しかしこの仕様はsnake\_caseを多用する言語(特にRuby)と相性が悪く、例えば`each_with_index`の中央部(with)が強調と(誤?)認識される。
@@ -868,7 +870,7 @@ SMはコードブロックをスペース4つのインデントで判別する�
 > |  TD  |  TD  |
 > |  TD  |  TD  |
 
-`-`の数は合わせなくてもよい。
+`-`の個数は横幅を合わせなくてもよい。
 
 ```
  TH | TH
@@ -922,14 +924,29 @@ GFMと同じトリプルバッククォートを使える。さらに先頭部�
     F(s)=\int_{0}^{\infty}f(t)e^{-st}dt
     ```
 
-``` math
-F(s)=\int_{0}^{\infty}f(t)e^{-st}dt
+> ``` math
+> F(s)=\int_{0}^{\infty}f(t)e^{-st}dt
 
-```
+> ```
 
 インラインコードブロックと同じように`$formula$`と書くとインラインで数式を挿入できる。
 
-    このインライン数式$E=mc^2$はQiitaでだけ使えます。
+    Qiitaではインライン数式$E=mc^2$が使えます。
 
-> このインライン数式$E=mc^2$はQiitaでだけ使えます。
+> Qiitaではインライン数式$E=mc^2$が使えます。
+
+ただしこの`$...$`の書式は時々副作用を起こす。次の文章はたまたま同じ行の中に$で囲まれた部分があるため数式と誤認識される。
+
+    $.get(url)は$.ajax({url: url})と同じ
+
+> $.get(url)は$.ajax({url: url})と同じ
+
+このケースを考慮して、Qiita拡張では`$`文字もバックスラッシュによるエスケープの対象となる。次の例はQiitaでは`\$`をエスケープと認識するが、別の処理系ではバックスラッシュがそのまま表示される。
+
+    \$.get(url)は\$.ajax({url: url})と同じ
+
+> \$.get(url)は\$.ajax({url: url})と同じ
+
+
+
 
